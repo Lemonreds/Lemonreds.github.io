@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  主题中文说明 |   Lemon </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header-wrapper">
+
+  <nav class="inner">
+    <div class="title">
+      <a href="/">
+        <img class="logo" src="/images/logo.png">
+      </a>
+    </div>
+
+    <ul class="menu">
+      
+      
+      <li class="item">
+        <a class="link" id="menu-home" href="/">
+          <i class="iconfont icon-home">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-archives" href="/archives">
+          <i class="iconfont icon-archives">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-tags" href="/tags">
+          <i class="iconfont icon-tags">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-about" href="/about">
+          <i class="iconfont icon-about">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-search">
+          <i class="iconfont icon-search">
+        </i></a>
+        
+
+        
+      
+    </li></ul>
+  </nav>
+</header>
+
+<header class="mobile-header-wrapper">
+  <i id="mobile-toggle" class="iconfont icon-menu mobile-toggle"></i>
+</header>   
+
+      <div class="container">       
+          
+          
+            <div class="container-inner">  
+          
+
+          <article class="post slideDownMin">
+  
+	
+<div class="header">
+		<p class="title">	
+			主题中文说明
+		</p>
+		<div class="info">	
+			<time>
+				10月 01, 2018
+			</time>
+
+			
+			
+				<i class="iconfont icon-words"></i>
+				<span class="words">939
+				</span>
+			
+		</div>
+</div> 
+	
+
+    <script type="text/x-mathjax-config">
+        var post = document.getElementsByClassName("post")[0];  
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none",    
+            tex2jax: {
+                inlineMath:  [ ["$", "$"] , ["\\(","\\)"]],
+                displayMath: [ ["$$","$$"] , ["\\[","\\]"]],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+            },
+            "HTML-CSS": {            
+                showMathMenu: false
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,post]);
+    </script>
+    <style>.MathJax{outline:0;}</style>
+
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.2/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ 
+
+	  <div class="typo post-content ">
+
+		
+
+			
+					<p>这篇文章主要记录了安装主题和使用中的一些常见问题和解决方法，请在使用主题之前详细阅读。<br><a id="more"></a></p>
+<h4 id="如何新建其他页面？"><a href="#如何新建其他页面？" class="headerlink" title="如何新建其他页面？"></a>如何新建其他页面？</h4><p>Hexo 默认不生成 tags/about 等页面，所以需要自己创建页面。</p>
+<ol>
+<li>bash 新建页面</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> yourblog</span><br><span class="line">hexo new page tags <span class="comment"># 生成标签页</span></span><br><span class="line">hexo new page about <span class="comment"># 生成关于页</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>增加 layout 行 到新建页面文件中的 <code>index.md</code> </li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">tags/about</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tag/about</span></span><br><span class="line"><span class="comment"># 注意layout的名称是tag和about   </span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+<h4 id="如何开启首页摘要？"><a href="#如何开启首页摘要？" class="headerlink" title="如何开启首页摘要？"></a>如何开启首页摘要？</h4><p>在markdown中 ，使用<code>&lt;!-- more --&gt;</code>分割摘要和内容, 文章内容默认会显示摘要,如果文章内容不需要显示摘要，请在文章头部增加<code>hide_excerpt: true</code>。</p>
+<h4 id="如何开启站内搜索？"><a href="#如何开启站内搜索？" class="headerlink" title="如何开启站内搜索？"></a>如何开启站内搜索？</h4><p>首先通过 <code>npm</code> 安装 <code>hexo-generator-search</code> :<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-search@2.2.1 --save</span><br></pre></td></tr></table></figure></p>
+<p>然后在根目录下配置文件_config.yml 新增:<br><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="根目录下-config-xml-生效的配置"><a href="#根目录下-config-xml-生效的配置" class="headerlink" title="根目录下 _config.xml 生效的配置"></a>根目录下 _config.xml 生效的配置</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="attr">index_generator:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">''</span></span><br><span class="line"><span class="attr">  per_page:</span> <span class="number">6</span>  <span class="comment"># 首页一页文章数量</span></span><br><span class="line"><span class="attr">  order_by:</span> <span class="bullet">-date</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pagination</span></span><br><span class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></span><br><span class="line"><span class="attr">per_page:</span> <span class="number">8</span>  <span class="comment"># 归档页一页文章数量</span></span><br><span class="line"><span class="attr">pagination_dir:</span> <span class="string">page</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">highlight:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  line_number:</span> <span class="literal">false</span> <span class="comment"># 代码高亮的行号</span></span><br><span class="line"><span class="attr">  auto_detect:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  tab_replace:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上文提到的搜索功能增加的配置</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br></pre></td></tr></table></figure>
+<h4 id="如何修改主题"><a href="#如何修改主题" class="headerlink" title="如何修改主题"></a>如何修改主题</h4><p>主题使用webpack4.0、sass和ejs进行开发。</p>
+<ol start="0">
+<li><p>EJS模板文件可以直接修改</p>
+</li>
+<li><p>安装Node依赖</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行开发环境</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> dev</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生产环境打包</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> build</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="关于主题名字"><a href="#关于主题名字" class="headerlink" title="关于主题名字"></a>关于主题名字</h4><p>主题名字来自歌曲 &lt;东京不太热&gt; -封茗囧菌 </p>
+  	
+					
+	  </div>     
+	  
+
+	<div class="bottom">
+  <div class="other">
+    <div class="meta">
+      
+      <i class="iconfont icon-category"></i>
+      <a class="category-link" href="/categories/theme/">theme</a>
+
+      
+
+      
+      <i class="iconfont icon-tag"></i>
+      <a class="tag-link" href="/tags/Nayo/">Nayo</a> <a class="tag-link" href="/tags/中文说明/">中文说明</a>
+      
+    </div>
+
+    <div class="operate">
+      
+      <span class="text">Share</span>
+      <ul class="share">
+	   			             
+        <li class="iconfont 
+		icon-share-qq 
+		-mob-share-qq 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weixin 
+		-mob-share-weixin 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weibo 
+		-mob-share-weibo 
+		item"></li>		
+   	   
+</ul>	
+
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+      
+    </div>
+  </div>
+
+
+  
+  <nav class="nav">
+    <div class="link">
+      
+      <a href="/2018/02/01/redux/" class="link-wrap">
+        <strong class="caption">older</strong>
+        
+        <span class="title">
+          读 Redux 源码 - Redux 简介
+        </span>
+      </a>
+      
+    </div>
+    <div class="link">
+      
+    </div>
+  </nav>
+  
+</div> 
+	
+<div class="comment">
+
+    
+
+    <div id="comment">
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src="//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+            app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',
+            path: window.location.pathname,
+            avatar: 'mm',
+            guest_info: ['nick', 'mail']
+        });
+    </script>
+    
+</div>	
+</article>
+
+          </div> 
+      </div>            
+    
+        <i id="toTop" class="iconfont icon-backtotop"></i>
+
+  
+    <div class="none" id="search">
+    <div class="header">
+        <input type="text" placeholder="输入你想搜索的" id="search-input" class="input">
+        
+        <i id="search-cancel" class="iconfont icon-cancel"></i>
+    </div>
+
+    <div id="search-result" class="result"></div>
+</div>
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">  
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>
+        
+    
+
+
+
+     
+    
+
+
+<footer class="footer">
+	<div class="inner">
+		<div class="copyright">
+			&copy;
+			
+			2019
+			Lemon
+
+			<br>
+			By <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>
+		</div>
+	</div>
+</footer>   
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title>主题中文说明</title>
+      <link href="/2018/10/01/hexo-theme-nayo/"/>
+      <content type="html"><![CDATA[<p>这篇文章主要记录了安装主题和使用中的一些常见问题和解决方法，请在使用主题之前详细阅读。<br><a id="more"></a></p><h4 id="如何新建其他页面？"><a href="#如何新建其他页面？" class="headerlink" title="如何新建其他页面？"></a>如何新建其他页面？</h4><p>Hexo 默认不生成 tags/about 等页面，所以需要自己创建页面。</p><ol><li>bash 新建页面</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> yourblog</span><br><span class="line">hexo new page tags <span class="comment"># 生成标签页</span></span><br><span class="line">hexo new page about <span class="comment"># 生成关于页</span></span><br></pre></td></tr></table></figure><ol start="2"><li>增加 layout 行 到新建页面文件中的 <code>index.md</code> </li></ol><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">tags/about</span></span><br><span class="line"><span class="attr">layout:</span> <span class="string">tag/about</span></span><br><span class="line"><span class="comment"># 注意layout的名称是tag和about   </span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure><h4 id="如何开启首页摘要？"><a href="#如何开启首页摘要？" class="headerlink" title="如何开启首页摘要？"></a>如何开启首页摘要？</h4><p>在markdown中 ，使用<code>&lt;!-- more --&gt;</code>分割摘要和内容, 文章内容默认会显示摘要,如果文章内容不需要显示摘要，请在文章头部增加<code>hide_excerpt: true</code>。</p><h4 id="如何开启站内搜索？"><a href="#如何开启站内搜索？" class="headerlink" title="如何开启站内搜索？"></a>如何开启站内搜索？</h4><p>首先通过 <code>npm</code> 安装 <code>hexo-generator-search</code> :<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-search@2.2.1 --save</span><br></pre></td></tr></table></figure></p><p>然后在根目录下配置文件_config.yml 新增:<br><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br></pre></td></tr></table></figure></p><h4 id="根目录下-config-xml-生效的配置"><a href="#根目录下-config-xml-生效的配置" class="headerlink" title="根目录下 _config.xml 生效的配置"></a>根目录下 _config.xml 生效的配置</h4><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="attr">index_generator:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">''</span></span><br><span class="line"><span class="attr">  per_page:</span> <span class="number">6</span>  <span class="comment"># 首页一页文章数量</span></span><br><span class="line"><span class="attr">  order_by:</span> <span class="bullet">-date</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pagination</span></span><br><span class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></span><br><span class="line"><span class="attr">per_page:</span> <span class="number">8</span>  <span class="comment"># 归档页一页文章数量</span></span><br><span class="line"><span class="attr">pagination_dir:</span> <span class="string">page</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">highlight:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  line_number:</span> <span class="literal">false</span> <span class="comment"># 代码高亮的行号</span></span><br><span class="line"><span class="attr">  auto_detect:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  tab_replace:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 上文提到的搜索功能增加的配置</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br></pre></td></tr></table></figure><h4 id="如何修改主题"><a href="#如何修改主题" class="headerlink" title="如何修改主题"></a>如何修改主题</h4><p>主题使用webpack4.0、sass和ejs进行开发。</p><ol start="0"><li><p>EJS模板文件可以直接修改</p></li><li><p>安装Node依赖</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br></pre></td></tr></table></figure></li><li><p>运行开发环境</p><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> dev</span></span><br></pre></td></tr></table></figure></li><li><p>生产环境打包</p><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> build</span></span><br></pre></td></tr></table></figure></li></ol><h4 id="关于主题名字"><a href="#关于主题名字" class="headerlink" title="关于主题名字"></a>关于主题名字</h4><p>主题名字来自歌曲 &lt;东京不太热&gt; -封茗囧菌 </p>]]></content>
+      
+      <categories>
+          
+          <category> theme </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Nayo </tag>
+            
+            <tag> 中文说明 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>读 Redux 源码 - Redux 简介</title>
+      <link href="/2018/02/01/redux/"/>
+      <content type="html"><![CDATA[<p>在许多React应用中，通常都会使用Redux作为扩展，为的是解决一些React的痛点，使开发工作变得更为轻松。其中一个最常见的场景便是“组件通信”。在React中，父子组件之间交流数据可以通过props，嵌套多层的父子组件则可以使用context传递数据，而两个独立的、不相关的组件之间进行数据交流，就会变得非常困难。</p><a id="more"></a><h4 id="React和Redux"><a href="#React和Redux" class="headerlink" title="React和Redux"></a>React和Redux</h4><p>在许多React应用中，通常都会使用Redux作为扩展，为的是解决一些React的痛点，使开发工作变得更为轻松。其中一个最常见的场景便是“组件通信”。在React中，父子组件之间交流数据可以通过props，嵌套多层的父子组件则可以使用context传递数据，而两个独立的、不相关的组件之间进行数据交流，就会变得非常困难，例如：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;App&gt;</span><br><span class="line">&lt;Header /&gt;</span><br><span class="line">&lt;Footer /&gt;</span><br><span class="line">&lt;<span class="regexp">/App&gt;</span></span><br></pre></td></tr></table></figure><p>Header组件和Footer组件进行数据交流的唯一方法就是状态提升，也就是将共享的状态提升到App这个组件，再由App组件分发props给Header组件和Footer组件。除此之外，React似乎不能提供更为优雅的解决方式。这还是最简单的场景，如果需要共享状态的两个组件位于不同组件内部嵌套层级很深的某一个角落中，这样的状态提升就会增加不少难度，并使代码臃肿冗余，难以阅读。</p><p>Redux就是解决方案，尽管Redux强调并非为React而生，但其与React配合，就会发生化合反应，变得异常强大。</p><p>Redux定义为<span data-type="color" style="color:rgb(51, 51, 51)"><span data-type="background" style="background-color:rgb(255, 255, 255)"> JavaScript 状态容器，提供可预测化的状态管理。何为状态？可以理解为随着时间变化而变化的数据，而Redux就是一个存放数据的容器，并负责对数据进行管理维护。上述遇到的组件通信困境的解决方法，就可以将组件共享的状态委托给Redux，让Redux代为管理，再由Redux分发状态给有需要的组件。组件也可以向Redux发出通信，更新容器中的数据。何为可预测化的状态管理？Redux提供单一的获取容器内数据的方法，同时更新容器内数据的方式也是唯一的，这样就很容易追踪到具体的组件，是以怎样的方式修改了容器中数据，从而使得调试和溯源变得简单。</span></span></p><h4 id="Redux-思想"><a href="#Redux-思想" class="headerlink" title="Redux 思想"></a>Redux 思想</h4><p>Redux整个框架设计都离不开以下几个概念，理解了以下的概念后，明白它们之间是如何相互作用的，也就明白了Redux的精髓，接下里简单介绍这些概念以及在JavaScript中的实现：</p><h5 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h5><p>状态管理的容器，内部维护state状态树，对外暴露多个方法，如用于获取state的方法，更新state的方法，注册注销监听器的方法。Reudx强调，一个Redux应用只有一个单一的 store，当你的state变得复杂、需要拆分数据处理逻辑时，应该使用 reducer 组合，而不是创建多个 store。</p><p>在Redux的实现中，Store是一个对象，提供以下接口来做到上面的操作：</p><ul><li>getState()   获取state的方法</li><li>dispatch(acion) 更新state的方法</li><li>subscribe(listener) 注册监听器的方法，这个方法返回一个函数，用于注销监听器</li></ul><h5 id="State"><a href="#State" class="headerlink" title="State"></a>State</h5><p>状态树，被保存于Store容器中，由Store负责维护，是一个存储数据的普通对象。</p><p>例如一个 Todo 应用的 State 可以是这样：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 可以是任意的javascript类型数据</span></span><br><span class="line">  todos: [&#123; <span class="comment">// array</span></span><br><span class="line">    text: <span class="string">'Eat food'</span>, <span class="comment">//object</span></span><br><span class="line">    completed: <span class="literal">true</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    text: <span class="string">'Exercise'</span>,</span><br><span class="line">    completed: <span class="literal">false</span></span><br><span class="line">  &#125;],</span><br><span class="line">  visibilityFilter: <span class="string">'SHOW_COMPLETED'</span> <span class="comment">// string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h5><p>一个普通的对象，用于描述state即将发生什么变化。action 对象内必须使用一个字符串类型的 type 字段来表示将要执行的动作，其他字段可以任意定制，作为载荷携带任意数据。</p><p>例如  描述向状态树增加一个新的TODO的action可以是这样：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    <span class="comment">// type 是必须的</span></span><br><span class="line">    <span class="comment">// redux 在处理 action 的时候</span></span><br><span class="line">    <span class="comment">// 根据 type 来执行不同的处理逻辑</span></span><br><span class="line">    type: <span class="string">'ADD_TODO'</span>, </span><br><span class="line">    <span class="comment">// 其他字段可以任意定制</span></span><br><span class="line">    <span class="comment">// 这里传入 string 作为新增 TODO 的内容</span></span><br><span class="line">    text: <span class="string">'Go to swimming pool'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="ActionCreator"><a href="#ActionCreator" class="headerlink" title="ActionCreator"></a>ActionCreator</h5><p>这个概念并不是特别重要，actionCreator产生的背景是：如果我们每次更新state树都要在代码中写一个个action，action的type又是必须的，这样就会造成代码的重复冗余，所以衍生出了一个actionCreator的概念：（其实是因为懒和不美观..）</p><p>我们直接看代码就明白了：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// actionCreator</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTodo</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>&#123;</span><br><span class="line">         type: <span class="string">'ADD_TODO'</span>,</span><br><span class="line">         text</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 所以 我们可以这样使用</span></span><br><span class="line">dispatc(addTodo(<span class="string">'writing something'</span>))</span><br></pre></td></tr></table></figure><p>actionCreator就是一个产生action（注意，action的对象）的函数，为偷懒而生，这样我们就不用每次都写重复的type，只需传入每次action不同的数据载荷即可，在代码中也可以减少冗余。Redux有一个更便捷，更偷懒的方法，这个后续会介绍，后话了。</p><h5 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h5><p>是一个接收state和action的纯函数，纯函数就是不对传入参数进行修改的函数。函数内部解析action的不同封装数据处理逻辑，最终返回一个新的state，reducer必须要返回一个新的state。</p><p>例如 TODO应用的一个reducer可能是这样 ：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// state = [] 为状态指定一个默认值</span></span><br><span class="line"><span class="comment">// 这样调用时 todos( undefined , action ) state就会被赋值为 []</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todos</span>(<span class="params">state = [], action</span>) </span>&#123;</span><br><span class="line"> <span class="comment">// 解析action.type 根据action的不同处理state</span></span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'ADD_TODO'</span>:</span><br><span class="line">    <span class="comment">// 增加一个TODO </span></span><br><span class="line">    <span class="comment">//返回一个新的state</span></span><br><span class="line">    <span class="keyword">return</span> state.concat([&#123; <span class="attr">text</span>: action.text, <span class="attr">completed</span>: <span class="literal">false</span> &#125;]);</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'TOGGLE_TODO'</span>:     </span><br><span class="line">    <span class="comment">// 修改TODO的状态</span></span><br><span class="line">    <span class="comment">// 返回一个新的state</span></span><br><span class="line">    <span class="keyword">return</span> state.map(<span class="function">(<span class="params">todo, index</span>) =&gt;</span></span><br><span class="line">      action.index === index ?</span><br><span class="line">        &#123; <span class="attr">text</span>: todo.text, <span class="attr">completed</span>: !todo.completed &#125; :</span><br><span class="line">        todo</span><br><span class="line">   )</span><br><span class="line">  <span class="comment">// 未知的action也要返回state </span></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>以上几乎是Redux的全部了，后面的源码解读中会多次出现这些概念，一个简单的记忆方法是，记住这几个概念是如何用Javascript表现的，例如，state最好的类型是对象，action是一个对象，reducer是一个纯函数。</p><p>再来总结一下Redux的运作流程：Redux负责创建一个负责管理维护State状态树的Store容器。Store对外提供来一系列的方法用于获取、更新、监听状态树。当需要更新状态树时，使用Store提供的 dispatch(action) 方法，Store容器内部由 reducer 负责来解析action，reducer函数接收两个参数，一个是当前的state，另一个是发起更新的action，根据action.type和action携带的数据对state树进行更新，并最终返回新的state。一个Store容器内部可以由多个reducer组合（当然也可以只有一个reducer）每一个reducer负责维护一部分数据，便于划分状态树的数据处理逻辑。</p><p>也就是：</p><p><code>Store ----(state)----&gt; View ----(action) ---&gt; Reducer ----( new State )---&gt; Store</code></p><p>阅读Redux的源代码，我们就会发现，其主要文件还没有十个，代码也非常精炼，Redux的思想结晶就蕴藏在那么几百行代码中。</p><p> /src/index.js，redux的API都由此导出：</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  createStore,</span><br><span class="line">  combineReducers,</span><br><span class="line">  bindActionCreators,</span><br><span class="line">  applyMiddleware,</span><br><span class="line">  compose,</span><br><span class="line">  __DO_NOT_USE__ActionTypes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>需要指出的是，Redux并没有那么复杂，接下来会对其API代码逐一进行解读。</p><p><a href="https://github.com/Lemonreds/aola/labels/Redux%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB" target="_blank" rel="noopener">Redux-源码解读-阅读更多</a></p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Redux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>文章排版</title>
+      <link href="/2018/01/01/Markdown/"/>
+      <content type="html"><![CDATA[<p>豫章故郡，洪都新府。星分翼轸，地接衡庐。襟三江而带五湖，控蛮荆而引瓯越。物华天宝，龙光射牛斗之墟；人杰地灵，徐孺下陈蕃之榻。雄州雾列，俊采星驰。台隍枕夷夏之交，宾主尽东南之美。都督阎公之雅望，棨戟遥临；宇文新州之懿范，襜帷暂驻。十旬休假，胜友如云；千里逢迎，高朋满座。腾蛟起凤，孟学士之词宗；紫电青霜，王将军之武库。家君作宰，路出名区；童子何知，躬逢胜饯。</p><p>时维九月，序属三秋。潦水尽而寒潭清，烟光凝而暮山紫。俨骖騑于上路，访风景于崇阿；临帝子之长洲，得天人之旧馆。层峦耸翠，上出重霄；飞阁流丹，下临无地。鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，即冈峦之体势。</p><p>披绣闼，俯雕甍，山原旷其盈视，川泽纡其骇瞩。闾阎扑地，钟鸣鼎食之家；舸舰迷津，青雀黄龙之舳。云销雨霁，彩彻区明。落霞与孤鹜齐飞，秋水共长天一色。渔舟唱晚，响穷彭蠡之滨；雁阵惊寒，声断衡阳之浦。</p><p>When $a \ne 0$, there are two solutions to \( ax^2 + bx + c = 0 \)  and they are<br>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p><a id="more"></a><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// gallery post: </span></span><br><span class="line"><span class="symbol">title:</span> 文章排版</span><br><span class="line"><span class="symbol">date:</span> <span class="number">2017</span><span class="number">-11</span><span class="number">-10</span> <span class="number">23</span>:<span class="number">30</span>:<span class="number">04</span></span><br><span class="line"><span class="symbol">photos:</span></span><br><span class="line">- <span class="meta-keyword">/assets/</span><span class="number">01.</span>jpg</span><br><span class="line">- <span class="meta-keyword">/assets/</span><span class="number">02.</span>jpg</span><br><span class="line">- <span class="meta-keyword">/assets/</span><span class="number">03.</span>jpg</span><br><span class="line">- <span class="meta-keyword">/assets/</span><span class="number">04.</span>jpg</span><br></pre></td></tr></table></figure><h2 id="Title"><a href="#Title" class="headerlink" title="Title"></a>Title</h2><h1 id="一级标题-h1"><a href="#一级标题-h1" class="headerlink" title="一级标题 h1"></a>一级标题 h1</h1><h2 id="二级标题-h2"><a href="#二级标题-h2" class="headerlink" title="二级标题 h2"></a>二级标题 h2</h2><h3 id="三级标题-h3"><a href="#三级标题-h3" class="headerlink" title="三级标题 h3"></a>三级标题 h3</h3><h4 id="四级标题-h4"><a href="#四级标题-h4" class="headerlink" title="四级标题 h4"></a>四级标题 h4</h4><h5 id="五级标题-h5"><a href="#五级标题-h5" class="headerlink" title="五级标题 h5"></a>五级标题 h5</h5><h6 id="六级标题-h6"><a href="#六级标题-h6" class="headerlink" title="六级标题 h6"></a>六级标题 h6</h6><h2 id="Paragraph"><a href="#Paragraph" class="headerlink" title="Paragraph"></a>Paragraph</h2><p>Lorem ipsum dolor sit amet, <a href="">test link</a> consectetur adipiscing elit. <strong>Strong text</strong> pellentesque ligula commodo viverra vehicula. <em>Italic text</em> at ullamcorper enim. Morbi a euismod nibh. <u>Underline text</u> non elit nisl. <del>Deleted text</del> tristique, sem id condimentum tempus, metus lectus venenatis mauris, sit amet semper lorem felis a eros. Fusce egestas nibh at sagittis auctor. Sed ultricies ac arcu quis molestie. Donec dapibus nunc in nibh egestas, vitae volutpat sem iaculis. Curabitur sem tellus, elementum nec quam id, fermentum laoreet mi. Ut mollis ullamcorper turpis, vitae facilisis velit ultricies sit amet. Etiam laoreet dui odio, id tempus justo tincidunt id. Phasellus scelerisque nunc sed nunc ultricies accumsan.</p><p>Interdum et malesuada fames ac ante ipsum primis in faucibus. <code>Sed erat diam</code>, blandit eget felis aliquam, rhoncus varius urna. Donec tellus sapien, sodales eget ante vitae, feugiat ullamcorper urna. Praesent auctor dui vitae dapibus eleifend. Proin viverra mollis neque, ut ullamcorper elit posuere eget.</p><blockquote><p>Praesent diam elit, interdum ut pulvinar placerat, imperdiet at magna.</p></blockquote><p>Maecenas ornare arcu at mi suscipit, non molestie tortor ultrices. Aenean convallis, diam et congue ultricies, erat magna tincidunt orci, pulvinar posuere mi sapien ac magna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent vitae placerat mauris. Nullam laoreet ante posuere tortor blandit auctor. Sed id ligula volutpat leo consequat placerat. Mauris fermentum dolor sed augue malesuada sollicitudin. Vivamus ultrices nunc felis, quis viverra orci eleifend ut. Donec et quam id urna cursus posuere. Donec elementum scelerisque laoreet.</p><h2 id="List-Types"><a href="#List-Types" class="headerlink" title="List Types"></a>List Types</h2><h3 id="Definition-List-dl"><a href="#Definition-List-dl" class="headerlink" title="Definition List (dl)"></a>Definition List (dl)</h3><dl><dt>Definition List Title</dt><dd>This is a definition list division.</dd></dl><h3 id="Ordered-List-ol"><a href="#Ordered-List-ol" class="headerlink" title="Ordered List (ol)"></a>Ordered List (ol)</h3><ol><li>List Item 1</li><li>List Item 2</li><li>List Item 3</li></ol><h3 id="Unordered-List-ul"><a href="#Unordered-List-ul" class="headerlink" title="Unordered List (ul)"></a>Unordered List (ul)</h3><ul><li>List Item 1</li><li>List Item 2</li><li>List Item 3</li></ul><h2 id="Table"><a href="#Table" class="headerlink" title="Table"></a>Table</h2><table><thead><tr><th>Table Header 1</th><th>Table Header 2</th><th>Table Header 3</th></tr></thead><tbody><tr><td>Division 1</td><td>Division 2</td><td>Division 3</td></tr><tr><td>Division 1</td><td>Division 2</td><td>Division 3</td></tr><tr><td>Division 1</td><td>Division 2</td><td>Division 3</td></tr></tbody></table><h2 id="Misc-Stuff-abbr-acronym-sub-sup-etc"><a href="#Misc-Stuff-abbr-acronym-sub-sup-etc" class="headerlink" title="Misc Stuff - abbr, acronym, sub, sup, etc."></a>Misc Stuff - abbr, acronym, sub, sup, etc.</h2><p>Lorem <sup>superscript</sup> dolor <sub>subscript</sub> amet, consectetuer adipiscing elit. Nullam dignissim convallis est. Quisque aliquam. <cite>cite</cite>. Nunc iaculis suscipit dui. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus. Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. <acronym title="National Basketball Association">NBA</acronym> Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.  <abbr title="Avenue">AVE</abbr></p><h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">items</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> len = items.length,</span><br><span class="line">        i, j, stop;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; len; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (j=<span class="number">0</span>, stop=len-i; j &lt; stop; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (items[j] &gt; items[j+<span class="number">1</span>])&#123;</span><br><span class="line">                swap(items, j, j+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> items;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="MathJax"><a href="#MathJax" class="headerlink" title="MathJax"></a>MathJax</h2><p>When $a \ne 0$, there are two solutions to \( ax^2 + bx + c = 0 \)  and they are<br>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>]]></content>
+      
+      <categories>
+          
+          <category> theme </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Nayo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Banner Post</title>
+      <link href="/2013/12/26/Banner-Post/"/>
+      <content type="html"><![CDATA[<p>Banner post:<br><figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">title:</span> Banner Post</span><br><span class="line"><span class="symbol">date:</span> <span class="number">2013</span><span class="number">-12</span><span class="number">-26</span> <span class="number">00</span>:<span class="number">16</span>:<span class="number">18</span></span><br><span class="line"><span class="symbol">banner:</span> <span class="meta-keyword">/assets/</span><span class="number">05.</span>jpg</span><br></pre></td></tr></table></figure></p><p><em>From <a href="http://wallbase.cc" target="_blank" rel="noopener">Wallbase.cc</a></em></p>]]></content>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Images</title>
+      <link href="/2013/12/25/excerpts/"/>
+      <content type="html"><![CDATA[<p>The following contents should be invisible in home/archive page.</p><a id="more"></a><p><img src="/assets/01.jpg" alt="no img"><br><img src="/assets/02.jpg" alt="no img"><br><img src="/assets/03.jpg" alt="no img"><br><img src="/assets/04.jpg" alt="no img"><br><img src="/assets/05.jpg" alt="no img"></p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> images </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>中文測試</title>
+      <link href="/2013/12/24/%E4%B8%AD%E6%96%87%E6%B8%AC%E8%A9%A6/"/>
+      <content type="html"><![CDATA[<p>This is a Chinese test post.</p><p>丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。</p><p>明月几时有？把酒问青天。不知天上宫阙，今夕是何年。我欲乘风归去，又恐琼楼玉宇，高处不胜寒。起舞弄清影，何似在人间？(何似 一作：何时；又恐 一作：惟 / 唯恐)<br>转朱阁，低绮户，照无眠。不应有恨，何事长向别时圆？人有悲欢离合，月有阴晴圆缺，此事古难全。但愿人长久，千里共婵娟。(长向 一作：偏向)</p><blockquote><p>工步他始能詩的，裝進分星海演意學值例道……於財型目古香亮自和這乎？化經溫詩。只賽嚴大一主價世哥受的沒有中年即病行金拉麼河。主小路了種就小為廣不？</p></blockquote><p><em>From <a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">亂數假文產生器 - Chinese Lorem Ipsum</a></em></p>]]></content>
+      
+      <categories>
+          
+          <category> 测试 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.</title>
+      <link href="/2013/12/24/long-title/"/>
+      <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida enim suscipit, porttitor risus et, aliquet odio. Pellentesque sagittis est dolor, eget porttitor tellus posuere quis. Donec pellentesque mauris at nunc aliquet, ultrices fermentum velit dictum. Suspendisse porta lorem diam, vel finibus felis fermentum vitae. Suspendisse vel efficitur lectus. Vivamus non finibus nunc, vel pellentesque libero. Nam at accumsan arcu. Phasellus ac sapien tristique, aliquam velit quis, aliquet lectus. Fusce nec ante tempus, efficitur quam vitae, rhoncus lectus. Nam viverra mollis libero, vel elementum velit tristique at. Curabitur interdum, est vel molestie semper, elit nisl efficitur ante, auctor pellentesque nulla orci vitae odio. Nullam vel libero sit amet ligula vehicula venenatis imperdiet sit amet sapien.<br><a id="more"></a></p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Nayo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Categories</title>
+      <link href="/2013/12/24/categories/"/>
+      <content type="html"><![CDATA[<p>This post contains 3 categories. Make sure your theme can display all of the categories.</p>]]></content>
+      
+      <categories>
+          
+          <category> Foo </category>
+          
+          <category> Bar </category>
+          
+          <category> Baz </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Link Post</title>
+      <link href="/2013/12/24/link-post/"/>
+      <content type="html"><![CDATA[<p>This is a link post. Clicking on the link should open <a href="http://www.google.com/" target="_blank" rel="noopener">Google</a> in a new tab or window.</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Nayo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Tags</title>
+      <link href="/2013/12/24/tags/"/>
+      <content type="html"><![CDATA[<p>This post contains 3 tags. Make sure your theme can display all of the tags.</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Foo </tag>
+            
+            <tag> Bar </tag>
+            
+            <tag> Baz </tag>
+            
+        </tags>
+      
+    </entry>
+    
+  
+  
+</search>

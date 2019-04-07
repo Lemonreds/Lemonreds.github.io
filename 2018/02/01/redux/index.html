@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  读 Redux 源码 - Redux 简介 |   Lemon </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header-wrapper">
+
+  <nav class="inner">
+    <div class="title">
+      <a href="/">
+        <img class="logo" src="/images/logo.png">
+      </a>
+    </div>
+
+    <ul class="menu">
+      
+      
+      <li class="item">
+        <a class="link" id="menu-home" href="/">
+          <i class="iconfont icon-home">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-archives" href="/archives">
+          <i class="iconfont icon-archives">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-tags" href="/tags">
+          <i class="iconfont icon-tags">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-about" href="/about">
+          <i class="iconfont icon-about">
+        </i></a>
+      </li>
+      
+      
+      
+      <li class="item">
+        <a class="link" id="menu-search">
+          <i class="iconfont icon-search">
+        </i></a>
+        
+
+        
+      
+    </li></ul>
+  </nav>
+</header>
+
+<header class="mobile-header-wrapper">
+  <i id="mobile-toggle" class="iconfont icon-menu mobile-toggle"></i>
+</header>   
+
+      <div class="container">       
+          
+          
+            <div class="container-inner">  
+          
+
+          <article class="post slideDownMin">
+  
+	
+<div class="header">
+		<p class="title">	
+			读 Redux 源码 - Redux 简介
+		</p>
+		<div class="info">	
+			<time>
+				2月 01, 2018
+			</time>
+
+			
+			
+				<i class="iconfont icon-words"></i>
+				<span class="words">3638
+				</span>
+			
+		</div>
+</div> 
+	
+
+    <script type="text/x-mathjax-config">
+        var post = document.getElementsByClassName("post")[0];  
+        MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none",    
+            tex2jax: {
+                inlineMath:  [ ["$", "$"] , ["\\(","\\)"]],
+                displayMath: [ ["$$","$$"] , ["\\[","\\]"]],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+            },
+            "HTML-CSS": {            
+                showMathMenu: false
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub,post]);
+    </script>
+    <style>.MathJax{outline:0;}</style>
+
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.2/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+ 
+
+	  <div class="typo post-content ">
+
+		
+			
+				<div class="banner" src="/redux/redux.png" style="background-image:url(/redux/redux.png)"> </div>	
+
+		
+
+			
+					<h4 id="React和Redux"><a href="#React和Redux" class="headerlink" title="React和Redux"></a>React和Redux</h4><p>在许多React应用中，通常都会使用Redux作为扩展，为的是解决一些React的痛点，使开发工作变得更为轻松。其中一个最常见的场景便是“组件通信”。在React中，父子组件之间交流数据可以通过props，嵌套多层的父子组件则可以使用context传递数据，而两个独立的、不相关的组件之间进行数据交流，就会变得非常困难，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;App&gt;</span><br><span class="line">&lt;Header /&gt;</span><br><span class="line">&lt;Footer /&gt;</span><br><span class="line">&lt;<span class="regexp">/App&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Header组件和Footer组件进行数据交流的唯一方法就是状态提升，也就是将共享的状态提升到App这个组件，再由App组件分发props给Header组件和Footer组件。除此之外，React似乎不能提供更为优雅的解决方式。这还是最简单的场景，如果需要共享状态的两个组件位于不同组件内部嵌套层级很深的某一个角落中，这样的状态提升就会增加不少难度，并使代码臃肿冗余，难以阅读。</p>
+<p>Redux就是解决方案，尽管Redux强调并非为React而生，但其与React配合，就会发生化合反应，变得异常强大。</p>
+<p>Redux定义为<span data-type="color" style="color:rgb(51, 51, 51)"><span data-type="background" style="background-color:rgb(255, 255, 255)"> JavaScript 状态容器，提供可预测化的状态管理。何为状态？可以理解为随着时间变化而变化的数据，而Redux就是一个存放数据的容器，并负责对数据进行管理维护。上述遇到的组件通信困境的解决方法，就可以将组件共享的状态委托给Redux，让Redux代为管理，再由Redux分发状态给有需要的组件。组件也可以向Redux发出通信，更新容器中的数据。何为可预测化的状态管理？Redux提供单一的获取容器内数据的方法，同时更新容器内数据的方式也是唯一的，这样就很容易追踪到具体的组件，是以怎样的方式修改了容器中数据，从而使得调试和溯源变得简单。</span></span></p>
+<h4 id="Redux-思想"><a href="#Redux-思想" class="headerlink" title="Redux 思想"></a>Redux 思想</h4><p>Redux整个框架设计都离不开以下几个概念，理解了以下的概念后，明白它们之间是如何相互作用的，也就明白了Redux的精髓，接下里简单介绍这些概念以及在JavaScript中的实现：</p>
+<h5 id="Store"><a href="#Store" class="headerlink" title="Store"></a>Store</h5><p>状态管理的容器，内部维护state状态树，对外暴露多个方法，如用于获取state的方法，更新state的方法，注册注销监听器的方法。Reudx强调，一个Redux应用只有一个单一的 store，当你的state变得复杂、需要拆分数据处理逻辑时，应该使用 reducer 组合，而不是创建多个 store。</p>
+<p>在Redux的实现中，Store是一个对象，提供以下接口来做到上面的操作：</p>
+<ul>
+<li>getState()   获取state的方法</li>
+<li>dispatch(acion) 更新state的方法</li>
+<li>subscribe(listener) 注册监听器的方法，这个方法返回一个函数，用于注销监听器</li>
+</ul>
+<h5 id="State"><a href="#State" class="headerlink" title="State"></a>State</h5><p>状态树，被保存于Store容器中，由Store负责维护，是一个存储数据的普通对象。</p>
+<p>例如一个 Todo 应用的 State 可以是这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 可以是任意的javascript类型数据</span></span><br><span class="line">  todos: [&#123; <span class="comment">// array</span></span><br><span class="line">    text: <span class="string">'Eat food'</span>, <span class="comment">//object</span></span><br><span class="line">    completed: <span class="literal">true</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    text: <span class="string">'Exercise'</span>,</span><br><span class="line">    completed: <span class="literal">false</span></span><br><span class="line">  &#125;],</span><br><span class="line">  visibilityFilter: <span class="string">'SHOW_COMPLETED'</span> <span class="comment">// string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h5><p>一个普通的对象，用于描述state即将发生什么变化。action 对象内必须使用一个字符串类型的 type 字段来表示将要执行的动作，其他字段可以任意定制，作为载荷携带任意数据。</p>
+<p>例如  描述向状态树增加一个新的TODO的action可以是这样：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123; </span><br><span class="line">    <span class="comment">// type 是必须的</span></span><br><span class="line">    <span class="comment">// redux 在处理 action 的时候</span></span><br><span class="line">    <span class="comment">// 根据 type 来执行不同的处理逻辑</span></span><br><span class="line">    type: <span class="string">'ADD_TODO'</span>, </span><br><span class="line">    <span class="comment">// 其他字段可以任意定制</span></span><br><span class="line">    <span class="comment">// 这里传入 string 作为新增 TODO 的内容</span></span><br><span class="line">    text: <span class="string">'Go to swimming pool'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="ActionCreator"><a href="#ActionCreator" class="headerlink" title="ActionCreator"></a>ActionCreator</h5><p>这个概念并不是特别重要，actionCreator产生的背景是：如果我们每次更新state树都要在代码中写一个个action，action的type又是必须的，这样就会造成代码的重复冗余，所以衍生出了一个actionCreator的概念：（其实是因为懒和不美观..）</p>
+<p>我们直接看代码就明白了：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// actionCreator</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTodo</span>(<span class="params">text</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span>&#123;</span><br><span class="line">         type: <span class="string">'ADD_TODO'</span>,</span><br><span class="line">         text</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 所以 我们可以这样使用</span></span><br><span class="line">dispatc(addTodo(<span class="string">'writing something'</span>))</span><br></pre></td></tr></table></figure>
+<p>actionCreator就是一个产生action（注意，action的对象）的函数，为偷懒而生，这样我们就不用每次都写重复的type，只需传入每次action不同的数据载荷即可，在代码中也可以减少冗余。Redux有一个更便捷，更偷懒的方法，这个后续会介绍，后话了。</p>
+<h5 id="Reducer"><a href="#Reducer" class="headerlink" title="Reducer"></a>Reducer</h5><p>是一个接收state和action的纯函数，纯函数就是不对传入参数进行修改的函数。函数内部解析action的不同封装数据处理逻辑，最终返回一个新的state，reducer必须要返回一个新的state。</p>
+<p>例如 TODO应用的一个reducer可能是这样 ：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// state = [] 为状态指定一个默认值</span></span><br><span class="line"><span class="comment">// 这样调用时 todos( undefined , action ) state就会被赋值为 []</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todos</span>(<span class="params">state = [], action</span>) </span>&#123;</span><br><span class="line"> <span class="comment">// 解析action.type 根据action的不同处理state</span></span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'ADD_TODO'</span>:</span><br><span class="line">    <span class="comment">// 增加一个TODO </span></span><br><span class="line">    <span class="comment">//返回一个新的state</span></span><br><span class="line">    <span class="keyword">return</span> state.concat([&#123; <span class="attr">text</span>: action.text, <span class="attr">completed</span>: <span class="literal">false</span> &#125;]);</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'TOGGLE_TODO'</span>:     </span><br><span class="line">    <span class="comment">// 修改TODO的状态</span></span><br><span class="line">    <span class="comment">// 返回一个新的state</span></span><br><span class="line">    <span class="keyword">return</span> state.map(<span class="function">(<span class="params">todo, index</span>) =&gt;</span></span><br><span class="line">      action.index === index ?</span><br><span class="line">        &#123; <span class="attr">text</span>: todo.text, <span class="attr">completed</span>: !todo.completed &#125; :</span><br><span class="line">        todo</span><br><span class="line">   )</span><br><span class="line">  <span class="comment">// 未知的action也要返回state </span></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">return</span> state;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>以上几乎是Redux的全部了，后面的源码解读中会多次出现这些概念，一个简单的记忆方法是，记住这几个概念是如何用Javascript表现的，例如，state最好的类型是对象，action是一个对象，reducer是一个纯函数。</p>
+<p>再来总结一下Redux的运作流程：Redux负责创建一个负责管理维护State状态树的Store容器。Store对外提供来一系列的方法用于获取、更新、监听状态树。当需要更新状态树时，使用Store提供的 dispatch(action) 方法，Store容器内部由 reducer 负责来解析action，reducer函数接收两个参数，一个是当前的state，另一个是发起更新的action，根据action.type和action携带的数据对state树进行更新，并最终返回新的state。一个Store容器内部可以由多个reducer组合（当然也可以只有一个reducer）每一个reducer负责维护一部分数据，便于划分状态树的数据处理逻辑。</p>
+<p>也就是：</p>
+<p><code>Store ----(state)----&gt; View ----(action) ---&gt; Reducer ----( new State )---&gt; Store</code></p>
+<p>阅读Redux的源代码，我们就会发现，其主要文件还没有十个，代码也非常精炼，Redux的思想结晶就蕴藏在那么几百行代码中。</p>
+<p> /src/index.js，redux的API都由此导出：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  createStore,</span><br><span class="line">  combineReducers,</span><br><span class="line">  bindActionCreators,</span><br><span class="line">  applyMiddleware,</span><br><span class="line">  compose,</span><br><span class="line">  __DO_NOT_USE__ActionTypes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要指出的是，Redux并没有那么复杂，接下来会对其API代码逐一进行解读。</p>
+<p><a href="https://github.com/Lemonreds/aola/labels/Redux%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB" target="_blank" rel="noopener">Redux-源码解读-阅读更多</a></p>  					
+					
+	  </div>     
+	  
+
+	<div class="bottom">
+  <div class="other">
+    <div class="meta">
+      
+
+      
+      <i class="iconfont icon-tag"></i>
+      <a class="tag-link" href="/tags/Redux/">Redux</a>
+      
+    </div>
+
+    <div class="operate">
+      
+      <span class="text">Share</span>
+      <ul class="share">
+	   			             
+        <li class="iconfont 
+		icon-share-qq 
+		-mob-share-qq 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weixin 
+		-mob-share-weixin 
+		item"></li>		
+   	   			             
+        <li class="iconfont 
+		icon-share-weibo 
+		-mob-share-weibo 
+		item"></li>		
+   	   
+</ul>	
+
+<script id="-mob-share" src="https://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+      
+    </div>
+  </div>
+
+
+  
+  <nav class="nav">
+    <div class="link">
+      
+      <a href="/2018/01/01/Markdown/" class="link-wrap">
+        <strong class="caption">older</strong>
+        
+        <span class="title">
+          文章排版
+        </span>
+      </a>
+      
+    </div>
+    <div class="link">
+      
+      <a href="/2018/10/01/hexo-theme-nayo/" class="link-wrap">
+        <strong class="caption">newer</strong>
+        
+        <span class="title">
+          主题中文说明
+        </span>
+      </a>
+      
+    </div>
+  </nav>
+  
+</div> 
+	
+<div class="comment">
+
+    
+
+    <div id="comment">
+    </div>
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+
+    <script src="//unpkg.com/valine@v1.1.8-beta/dist/Valine.min.js"></script>
+
+    <script>
+        new Valine({
+            el: '#comment',
+            notify: false,
+            verify: false,
+            app_id: 'cFM0eCo0CQ9xmBXmHi1eltol-gzGzoHsz',
+            app_key: 'oh9tizsnvV2vNvWgqEvoNtQO',
+            path: window.location.pathname,
+            avatar: 'mm',
+            guest_info: ['nick', 'mail']
+        });
+    </script>
+    
+</div>	
+</article>
+
+          </div> 
+      </div>            
+    
+        <i id="toTop" class="iconfont icon-backtotop"></i>
+
+  
+    <div class="none" id="search">
+    <div class="header">
+        <input type="text" placeholder="输入你想搜索的" id="search-input" class="input">
+        
+        <i id="search-cancel" class="iconfont icon-cancel"></i>
+    </div>
+
+    <div id="search-result" class="result"></div>
+</div>
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">  
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">首页
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">归档
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">标签
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">关于
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            
+         
+      
+</div>
+        
+    
+
+
+
+     
+    
+
+
+<footer class="footer">
+	<div class="inner">
+		<div class="copyright">
+			&copy;
+			
+			2019
+			Lemon
+
+			<br>
+			By <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>
+		</div>
+	</div>
+</footer>   
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
