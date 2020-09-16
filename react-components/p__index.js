@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[5],{RXBc:function(c,e,n){"use strict";n.r(e);var t=n("q1tI"),o=n.n(t),a=n("Ty5D"),p=()=>o.a.createElement(a["c"],{to:"/comp"});e["default"]=p}}]);
