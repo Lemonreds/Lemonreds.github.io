@@ -1,1 +1,1 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[6],{RXBc:function(c,e,n){"use strict";n.r(e);var t=n("q1tI"),o=n.n(t),a=n("Ty5D"),p=()=>o.a.createElement(a["c"],{to:"/comp"});e["default"]=p}}]);
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[6],{RXBc:function(c,e,n){"use strict";n.r(e);var o=n("xwgP"),t=n.n(o),w=n("q5+0"),a=()=>t.a.createElement(w["c"],{to:"/comp"});e["default"]=a}}]);
