@@ -1,1 +1,1 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[4],{JdoG:function(n,r,w){"use strict";w.r(r);w("xwgP");var e=n=>{var r=n.children;return r};r["default"]=e}}]);
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[4],{JdoG:function(n,r,e){"use strict";e.r(r);var o=n=>{var r=n.children;return r};r["default"]=o}}]);
